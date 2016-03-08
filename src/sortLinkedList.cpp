@@ -12,6 +12,7 @@ NOTES: Without using extra array or linked list.
 */
 
 #include <stdio.h>
+#include <malloc.h>
 
 struct node {
 	int num;
@@ -19,5 +20,28 @@ struct node {
 };
 
 struct node * sortLinkedList(struct node *head) {
-	return NULL;
+	
+	struct node *ptr = (struct node*)malloc(sizeof(struct node));
+	struct node *current = (struct node*)malloc(sizeof(struct node));
+	ptr = head;
+	current = head;
+	int temp;
+
+	if (head == NULL)
+		return NULL;
+
+	while (ptr){
+		current = head;
+		while (current->next != NULL){
+			if (current->num > current->next->num){
+
+				temp = current->num;
+				current->num = current->next->num;
+				current->next->num = temp;
+			}
+			current = current->next;
+		}
+		ptr = ptr->next;
+	}
+	return head;
 }
